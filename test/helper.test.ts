@@ -28,6 +28,21 @@ describe(RailwayHelper, (): void => {
     // console.log(standardTrainList);
   });
 
+  it('should get the transfer plan list.', async (): Promise<void> => {
+    const date = new Date();
+    date.setDate(date.getDate() + 3);
+    const transferPlanList = await helper.getTransferPlanList(
+      date.toISOString().slice(0, 10),
+      'IWP',
+      'SJP',
+    );
+    transferPlanList.forEach((transferPlan) => {
+      expect(transferPlan.firstTrain.numberShort).toMatch(/[CDGKLSTYZ]?\d+/);
+      expect(transferPlan.secondTrain.numberShort).toMatch(/[CDGKLSTYZ]?\d+/);
+    });
+    // console.log(transferPlanList);
+  });
+
   it('should get the station list.', async (): Promise<void> => {
     const stationList = await helper.getStationList();
     stationList.forEach(checkValidStation);
