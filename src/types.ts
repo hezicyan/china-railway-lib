@@ -56,6 +56,7 @@ export const enum Accomendation {
   SOFT_SLEEPER = '软卧/动卧/一等卧',
   HARD_SLEEPER = '硬卧/二等卧',
   STANDING = '无座',
+  OTHER = '其他',
 }
 
 export type Available = '有';
@@ -73,6 +74,20 @@ export interface TrainInfo {
   arrivalTime: Date;
   bookable: boolean;
   allLeftTickets: AllTickets;
+}
+
+export interface TransferPlan {
+  departureStation: string;
+  arrivalStation: string;
+  transferStation: string;
+  departureTime: Date;
+  arrivalTime: Date;
+  totalDuration: number;
+  totalDurationText: string;
+  waitDuration: number;
+  waitDurationText: string;
+  firstTrain: TrainInfo;
+  secondTrain: TrainInfo;
 }
 
 export class StationNotFoundError extends Error {
